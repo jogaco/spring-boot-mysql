@@ -5,8 +5,15 @@
  */
 package com.operatornew.gamemanager.repository;
 
-import com.operatornew.gamemanager.domain.Game;
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-public interface GameRepository extends CrudRepository<Game, Integer> {
+import com.operatornew.gamemanager.domain.Game;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource(collectionResourceRel = "game", path = "games")
+
+public interface GameRepository extends PagingAndSortingRepository<Game, Integer> {
+    List<Game> findByName(@Param("name") String name);
 }
